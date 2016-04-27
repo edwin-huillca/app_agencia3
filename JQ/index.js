@@ -4,39 +4,29 @@ var app = {
     initialize: function() {
         this.bindEvents();
     },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        alert("aaa");
-        navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError);
-
+        
+        //maximumAge- Guarda la posicion por 5 minutos 
+        //enableHighAccuracy: Se tratan de obtener los mejores resultados posible del GPS
+        //timeout: el tiempo maximo que se espera para obtener la posicion en este caso 5 segundos
+        var options = {maximumAge: 500000, enableHighAccuracy:true, timeout: 5000};
+        navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError,options);
     },
     onSuccess:function(position){
-            alert('22::Latitude: '          + position.coords.latitude          + '\n' +
-                      'Longitude: '         + position.coords.longitude         + '\n' +
-                      'Altitude: '          + position.coords.altitude          + '\n' +
-                      'Accuracy: '          + position.coords.accuracy          + '\n' +
-                      'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-                      'Heading: '           + position.coords.heading           + '\n' +
-                      'Speed: '             + position.coords.speed             + '\n' +
-                      'Timestamp: '         + position.timestamp                + '\n');
-            
-
+        // alert('22::Latitude: '          + position.coords.latitude          + '\n' +
+        //           'Longitude: '         + position.coords.longitude         + '\n' +
+        //           'Altitude: '          + position.coords.altitude          + '\n' +
+        //           'Accuracy: '          + position.coords.accuracy          + '\n' +
+        //           'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+        //           'Heading: '           + position.coords.heading           + '\n' +
+        //           'Speed: '             + position.coords.speed             + '\n' +
+        //           'Timestamp: '         + position.timestamp                + '\n');
 
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-
-         alert("tamos...1");
-
         var latlng = new google.maps.LatLng(latitude, longitude);
 
         var myOptions = {
@@ -45,9 +35,7 @@ var app = {
             disableDefaultUI: true,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-
-        alert("tamos...2");
-        
+       
         var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
         var infowindow = new google.maps.InfoWindow({

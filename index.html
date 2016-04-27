@@ -4,54 +4,33 @@
         <meta charset="UTF-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Geolocalización</title>
-        
-
-		
-  <!--
-        <script type="text/javascript">
-			var onSuccess = function(position) {
-			    alert('Latitude: '          + position.coords.latitude          + '\n' +
-			          'Longitude: '         + position.coords.longitude         + '\n' +
-			          'Altitude: '          + position.coords.altitude          + '\n' +
-			          'Accuracy: '          + position.coords.accuracy          + '\n' +
-			          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-			          'Heading: '           + position.coords.heading           + '\n' +
-			          'Speed: '             + position.coords.speed             + '\n' +
-			          'Timestamp: '         + position.timestamp                + '\n');
-			};
-
-			function onError(error) {
-			    alert('code: '    + error.code    + '\n' +
-			          'message: ' + error.message + '\n');
-			}
-			 
-			navigator.geolocation.getCurrentPosition(onSuccess, onError);
-
-        	
-        </script>
-    -->
-        <style>
+        <link rel="stylesheet" href="JQ/jquery.mobile-1.4.2.min.css" />
+		<script src="JQ/jquery-2.1.1.min.js"></script>
+		<script src="JQ/jquery.mobile-1.4.2.min.js"></script>
+        <style type="text/css">
 			#map-canvas{
-				height:300px;
-				width:300px;
+				height:100%;
+				width:100%;
 				padding:0;
 				position:absolute !important;
 				top:40px;
 				right:0px;
 				bottom:0px !important;
 				left:0px !important;
-				border:solid 2px;
+				/*border:solid 2px;*/
 			}
 		</style>
     </head>
     <body>
     	      	
-    	<div>
-        	<h1>Tu posición actual</h1>
+    	<div data-role="page" id="paginaMapa" data-url="map-page">        	
+        	<div data-role="header">
+        		<h1>Tu posición actual</h1>
+        	</div>
+        	<div id="map-canvas"></div>
         </div>
-        <div id="map-canvas"></div>
-        
-     	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDktb8fD32tf-zedo5kIs3-wrEWUl2qRtQ&sensor=false"></script>
+
+     	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCu6Ig74XeCAn9QAay2PBQshvr-z-YWNqU&sensor=false"></script>
 		<script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="JQ/index.js"></script> 
         <script type="text/javascript">
