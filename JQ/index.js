@@ -43,20 +43,22 @@ var app = {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         
+        alert("tamos...1");
+        
         var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
-        // var infowindow = new google.maps.InfoWindow({
-        //           position: latlng,
-        //           content: '<p>Tu posición actual</p>'+latlng
-        //           });
+        var infowindow = new google.maps.InfoWindow({
+                  position: latlng,
+                  content: '<p>Tu posición actual</p>'+latlng
+                  });
         
-        // var marker = new google.maps.Marker({
-        //     position: latlng,
-        //     map: map,
-        //     title: "Mi posición",
-        //     animation: google.maps.Animation.DROP
-        // });
-        // google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
+        var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: "Mi posición",
+            animation: google.maps.Animation.DROP
+        });
+        google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
 
 
     },
