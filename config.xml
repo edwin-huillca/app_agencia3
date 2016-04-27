@@ -19,10 +19,7 @@
 
 <gap:plugin name="org.apache.cordova.splashscreen" />
 <gap:plugin name="org.apache.cordova.statusbar" />
-<plataform name="android">
-	<preference name="AIzaSyCu6Ig74XeCAn9QAay2PBQshvr-z-YWNqU" />
-</plataform>
-<plugin name="plugin.google.maps.menusito" source="pgb" />
+
 
 <access origin="*" subdomains="false"  />
 </widget>
