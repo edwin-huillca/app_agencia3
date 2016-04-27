@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns       = "http://www.w3.org/ns/widgets"
+    xmlns:gap       = "http://phonegap.com/ns/1.0"
+    xmlns:android   = "http://schemas.android.com/apk/res/android"
+    id              = "com.agencia.demo3.dev"
+    version         = "1.0.0">
+<name>DEV GEOLOCALIZACION DEMO</name>
+<description>Aplicación</description>
+
+<preference name="ios-statusbarstyle" value="black-opaque" />
+
+<feature name="http://api.phonegap.com/1.0/network"/>
+<feature name="http://api.phonegap.com/1.0/device"/>
+<feature name="http://api.phonegap.com/1.0/file" />
+<feature name="http://api.phonegap.com/1.0/camera" />
+
+<gap:plugin name="org.apache.cordova.device" />
+<gap:plugin name="org.apache.cordova.geolocation" />
+
+<gap:plugin name="org.apache.cordova.splashscreen" />
+<gap:plugin name="org.apache.cordova.statusbar" />
+<access origin="*" subdomains="false"  />
+</widget>
