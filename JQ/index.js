@@ -34,7 +34,10 @@ var app = {
 
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        var latlng = new google.maps.LatLng(latitude,longitude);
+
+         alert("tamos...1");
+
+        var latlng = new google.maps.LatLng(latitude, longitude);
 
         var myOptions = {
             zoom: 16,
@@ -42,8 +45,8 @@ var app = {
             disableDefaultUI: true,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        
-        alert("tamos...1");
+
+        alert("tamos...2");
         
         var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
