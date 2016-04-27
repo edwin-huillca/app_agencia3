@@ -5,14 +5,9 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Geolocalización</title>
         
-        <link rel="stylesheet" href="JQ/jquery.mobile-1.4.2.min.css" />
-		<script src="JQ/jquery-2.1.1.min.js"></script>
-		<script src="JQ/jquery.mobile-1.4.2.min.js"></script>
 
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCu6Ig74XeCAn9QAay2PBQshvr-z-YWNqU&sensor=false"></script>
-		<script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-  
+		
+  <!--
         <script type="text/javascript">
 			var onSuccess = function(position) {
 			    alert('Latitude: '          + position.coords.latitude          + '\n' +
@@ -34,6 +29,7 @@
 
         	
         </script>
+    -->
         <style>
 			#map-canvas{
 				height:300px;
@@ -56,5 +52,14 @@
             <div id="map-canvas"></div>
         
         </div>
+
+
+		<script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCu6Ig74XeCAn9QAay2PBQshvr-z-YWNqU&sensor=false"></script>
+        <script type="text/javascript">
+        	app.initialize();
+        </script>
     </body>
 </html>
