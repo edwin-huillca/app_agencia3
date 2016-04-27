@@ -19,5 +19,8 @@
 
 <gap:plugin name="org.apache.cordova.splashscreen" />
 <gap:plugin name="org.apache.cordova.statusbar" />
+
+<plugin name="plugin.google.maps.menusito" spec="1.2.5" source="pgb" />
+
 <access origin="*" subdomains="false"  />
 </widget>
