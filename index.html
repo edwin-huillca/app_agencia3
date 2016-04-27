@@ -8,8 +8,26 @@
         <link rel="stylesheet" href="JQ/jquery.mobile-1.4.2.min.css" />
 		<script src="JQ/jquery-2.1.1.min.js"></script>
 		<script src="JQ/jquery.mobile-1.4.2.min.js"></script>
-        <script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-        <script>
+        <script src="//maps.googleapis.com/maps/api/js?v=3"></script>
+        <script type="javascript/text">
+			var onSuccess = function(position) {
+			    alert('Latitude: '          + position.coords.latitude          + '\n' +
+			          'Longitude: '         + position.coords.longitude         + '\n' +
+			          'Altitude: '          + position.coords.altitude          + '\n' +
+			          'Accuracy: '          + position.coords.accuracy          + '\n' +
+			          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+			          'Heading: '           + position.coords.heading           + '\n' +
+			          'Speed: '             + position.coords.speed             + '\n' +
+			          'Timestamp: '         + position.timestamp                + '\n');
+			};
+
+			function onError(error) {
+			    alert('code: '    + error.code    + '\n' +
+			          'message: ' + error.message + '\n');
+			}
+			 
+			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
         	$( document ).on( "pageinit", "#paginaMapa", function(e,data) {
 				
 				var defaultPos = new google.maps.LatLng(19.289168, -99.653440);
@@ -32,7 +50,7 @@
 						navigator.geolocation.getCurrentPosition(exito, falla, options );
 					}//FIN IF
 					else {
-                    MuestraMapa(defaultPos);  // No soporta geolocalizacion y dibuja el mapa en posicion Default
+                    	MuestraMapa(defaultPos);  // No soporta geolocalizacion y dibuja el mapa en posicion Default
                		 }
 					 
 					 //FUNCION DIBUJAR MAPa
