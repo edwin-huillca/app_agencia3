@@ -20,6 +20,8 @@
 <gap:plugin name="org.apache.cordova.splashscreen" />
 <gap:plugin name="org.apache.cordova.statusbar" />
 
-
 <access origin="*" subdomains="false"  />
+<plugin name="cordova-plugin-whitelist" version="1"/>
+<allow-intent href="http://*/*"/>
+
 </widget>
