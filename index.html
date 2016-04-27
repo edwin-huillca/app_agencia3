@@ -9,7 +9,8 @@
 		<script src="JQ/jquery-2.1.1.min.js"></script>
 		<script src="JQ/jquery.mobile-1.4.2.min.js"></script>
         <script src="//maps.googleapis.com/maps/api/js?v=3"></script>
-        <script type="javascript/text">
+       
+        <script type="text/javascript">
 			var onSuccess = function(position) {
 			    alert('Latitude: '          + position.coords.latitude          + '\n' +
 			          'Longitude: '         + position.coords.longitude         + '\n' +
@@ -26,7 +27,7 @@
 			          'message: ' + error.message + '\n');
 			}
 			 
-			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+			//navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
         	$( document ).on( "pageinit", "#paginaMapa", function(e,data) {
 				
