@@ -4,7 +4,7 @@
     xmlns:android   = "http://schemas.android.com/apk/res/android"
     id              = "com.agencia.demo3.dev"
     version         = "1.0.0">
-<name>DEV GEOLOCALIZACION DEMO</name>
+<name>DEV GEOLOCALIZACION</name>
 <description>Aplicación</description>
 
 <preference name="ios-statusbarstyle" value="black-opaque" />
@@ -20,8 +20,8 @@
 <gap:plugin name="org.apache.cordova.splashscreen" />
 <gap:plugin name="org.apache.cordova.statusbar" />
 
-<access origin="*" subdomains="false"  />
-<plugin name="cordova-plugin-whitelist" version="1"/>
+<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 <allow-intent href="http://*/*"/>
 <allow-intent href="https://*/*"/>
+<access origin="*" subdomains="false"  />
 </widget>
