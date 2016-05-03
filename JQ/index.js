@@ -116,11 +116,16 @@ var app = {
 
         var bounceTimer;
         for (i = 1; i < markers.length; i++) {
+            var infowindow = new google.maps.InfoWindow({
+              position: markers[i].position,
+              content: '<p>' + markers[i].title + '</p>'
+              });
+
             google.maps.event.addListener(markers[i], 'click', function () {
                 //window.location.href = this.url;
-
                 infowindow.open(mapi,markers[i]);
             });
+            
 
             google.maps.event.addListener(markers[i], 'mouseover', function () {
 
