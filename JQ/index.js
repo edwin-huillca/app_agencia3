@@ -5,6 +5,9 @@ var app = {
         this.bindEvents();
     },
     bindEvents: function() {
+        //var params={position:{coords:{latitude: 0, longitude:0 }}};
+        //app.onSuccess(params);
+
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady: function() {
@@ -24,9 +27,12 @@ var app = {
         //           'Heading: '           + position.coords.heading           + '\n' +
         //           'Speed: '             + position.coords.speed             + '\n' +
         //           'Timestamp: '         + position.timestamp                + '\n');
-       
+    
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
+        //var latitude = -12.093840199999999;
+        //var longitude= -77.0339961
+        
         var latlng = new google.maps.LatLng(latitude, longitude);
 
         // var myOptions = {
@@ -68,15 +74,9 @@ var app = {
         });
         google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
 
-
-        var image2 = {
-            url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-estadio.png',
-        };
-
         var image = {
             url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-posicion.png',
         };
-
                
         $.ajax({
             url: "http://cristalsmart.azurewebsites.net/assets/bares/ajax/ajax_todos_estadios_json.aspx/GetRegistros",
@@ -87,7 +87,6 @@ var app = {
             dataType: "json",
            
             success: function (result) {
-                //console.log(result.d);
 
                 var markers_json = result.d;
                 
@@ -96,7 +95,7 @@ var app = {
                     
                     markers[index + 1] = new google.maps.Marker({
                         position: new google.maps.LatLng(item_marker.latitud, item_marker.longitud),
-                        url: actual_url,
+                        //url: actual_url,
                         title: item_marker.extra,
                         map: map,
                         icon: image,
@@ -115,19 +114,22 @@ var app = {
     onMarkersDisplay: function(mapi,markers){
 
         var bounceTimer;
+        var infowindow;
         for (i = 1; i < markers.length; i++) {
-            var infowindow = new google.maps.InfoWindow({
-              position: markers[i].position,
-              content: '<p>' + markers[i].title + '</p>'
-              });
+            var globo = markers[i];
 
-            google.maps.event.addListener(markers[i], 'click', function () {
+            google.maps.event.addListener(globo, 'click', function () {
+
+                infowindow = new google.maps.InfoWindow({
+                                  position: this.position,
+                                  content: '<p>' + this.title + '</p>'
+                                  });
                 //window.location.href = this.url;
-                infowindow.open(mapi,markers[i]);
+                infowindow.open(mapi,this);
             });
-            
 
-            google.maps.event.addListener(markers[i], 'mouseover', function () {
+
+            google.maps.event.addListener(globo, 'mouseover', function () {
 
                 if (this.getAnimation() == null || typeof this.getAnimation() === 'undefined') {
 
@@ -137,13 +139,10 @@ var app = {
                         that.setAnimation(google.maps.Animation.BOUNCE);
                     },
                     500);
-
                 }
-
-
             });
 
-            google.maps.event.addListener(markers[i], 'mouseout', function () {
+            google.maps.event.addListener(globo, 'mouseout', function () {
 
                 if (this.getAnimation() != null) {
                     this.setAnimation(null);
