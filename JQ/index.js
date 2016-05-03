@@ -1,5 +1,4 @@
-var map;
-var markers = [];
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -36,7 +35,8 @@ var app = {
         //     disableDefaultUI: true,
         //     mapTypeId: google.maps.MapTypeId.ROADMAP
         // };
-
+        var map;
+        var markers = [];
         var myOptions = {
             zoom: 13,
             zoomControl: true,
@@ -105,21 +105,21 @@ var app = {
 
                 });
 
-                app.onMarkersDisplay();
+                app.onMarkersDisplay(map,markers);
             }
         });
               
   
 
     },
-    onMarkersDisplay: function(){
+    onMarkersDisplay: function(mapi,markers){
 
         var bounceTimer;
         for (i = 1; i < markers.length; i++) {
             google.maps.event.addListener(markers[i], 'click', function () {
                 //window.location.href = this.url;
 
-                infowindow.open(map,markers[i]);
+                infowindow.open(mapi,markers[i]);
             });
 
             google.maps.event.addListener(markers[i], 'mouseover', function () {
