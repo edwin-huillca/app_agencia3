@@ -119,7 +119,7 @@ var app = {
             google.maps.event.addListener(markers[i], 'click', function () {
                 //window.location.href = this.url;
 
-                infowindow.open(map,marker);}
+                infowindow.open(map,markers[i]);
             });
 
             google.maps.event.addListener(markers[i], 'mouseover', function () {
