@@ -105,7 +105,7 @@ var app = {
 
                 });
 
-                this.onMarkersDisplay();
+                app.onMarkersDisplay();
             }
         });
               
@@ -117,7 +117,9 @@ var app = {
         var bounceTimer;
         for (i = 1; i < markers.length; i++) {
             google.maps.event.addListener(markers[i], 'click', function () {
-                window.location.href = this.url;
+                //window.location.href = this.url;
+
+                infowindow.open(map,marker);}
             });
 
             google.maps.event.addListener(markers[i], 'mouseover', function () {
