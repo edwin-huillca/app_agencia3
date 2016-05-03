@@ -69,58 +69,47 @@ var app = {
         google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
 
 
-                var image2 = {
-                    url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-estadio.png',
-                };
+        var image2 = {
+            url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-estadio.png',
+        };
 
-                var image = {
-                    url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-posicion.png',
-                };
+        var image = {
+            url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-posicion.png',
+        };
 
-                alert("estamos....");
+               
+        $.ajax({
+            url: "http://cristalsmart.azurewebsites.net/assets/bares/ajax/ajax_todos_estadios_json.aspx/GetRegistros",
+            type: "POST",
+            data: JSON.stringify({}),
+            contentType: "application/json; charset=utf-8",
+            crossDomain : true,
+            dataType: "json",
+           
+            success: function (result) {
+                //console.log(result.d);
 
+                var markers_json = result.d;
                 
-                $.ajax({
-                    url: "http://cristalsmart.azurewebsites.net/assets/bares/ajax/ajax_todos_estadios_json.aspx/GetRegistros",
-                    type: "POST",
-                    data: JSON.stringify({}),
-                    contentType: "application/json; charset=utf-8",
-                    crossDomain : true,
-                    dataType: "json",
-                   
-                    success: function (result) {
-                        //console.log(result.d);
-
-                        var markers_json = result.d;
-                        
-                        $.each(markers_json, function(index, item_marker) {
-                            var actual_url = 'detalleestadios.aspx?ID=' + item_marker.ID + '&latitud='  + item_marker.latitud + '&longitud='  + item_marker.longitud;
-                            
-                            markers[index + 1] = new google.maps.Marker({
-                                position: new google.maps.LatLng(item_marker.latitud, item_marker.longitud),
-                                url: actual_url,
-                                title: item_marker.extra,
-                                map: map,
-                                icon: image,
-                                optimized: false
-                            });
-
-                        });
-
-                        //this.onMarkersDisplay();
-                    }
-                })
-                .done(function(){
+                $.each(markers_json, function(index, item_marker) {
+                    var actual_url = 'detalleestadios.aspx?ID=' + item_marker.ID + '&latitud='  + item_marker.latitud + '&longitud='  + item_marker.longitud;
+                    
+                    markers[index + 1] = new google.maps.Marker({
+                        position: new google.maps.LatLng(item_marker.latitud, item_marker.longitud),
+                        url: actual_url,
+                        title: item_marker.extra,
+                        map: map,
+                        icon: image,
+                        optimized: false
+                    });
 
                 });
+
+                this.onMarkersDisplay();
+            }
+        });
               
   
-
-          
-
-
-            
-
 
     },
     onMarkersDisplay: function(){
