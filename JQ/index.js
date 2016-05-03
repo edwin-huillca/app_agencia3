@@ -37,7 +37,7 @@ var app = {
         //     mapTypeId: google.maps.MapTypeId.ROADMAP
         // };
 
-        var mapOptions = {
+        var myOptions = {
             zoom: 13,
             zoomControl: true,
             zoomControlOptions: {
@@ -52,7 +52,7 @@ var app = {
 
         };
        
-        var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+        map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
 
         var infowindow = new google.maps.InfoWindow({
@@ -77,12 +77,15 @@ var app = {
                     url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-posicion.png',
                 };
 
-               
+                alert("estamos....");
+
+                
                 $.ajax({
                     url: "http://cristalsmart.azurewebsites.net/assets/bares/ajax/ajax_todos_estadios_json.aspx/GetRegistros",
                     type: "POST",
                     data: JSON.stringify({}),
                     contentType: "application/json; charset=utf-8",
+                    crossDomain : true,
                     dataType: "json",
                    
                     success: function (result) {
@@ -104,15 +107,14 @@ var app = {
 
                         });
 
-                        this.onMarkersDisplay();
+                        //this.onMarkersDisplay();
                     }
                 })
                 .done(function(){
 
-                    //console.log("CONSTRUYENDO MAP");
                 });
               
-                // Fin de marcadores
+  
 
           
 
