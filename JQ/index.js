@@ -1,4 +1,5 @@
-
+var map;
+var markers = [];
 var app = {
     // Application Constructor
     initialize: function() {
@@ -24,19 +25,35 @@ var app = {
         //           'Heading: '           + position.coords.heading           + '\n' +
         //           'Speed: '             + position.coords.speed             + '\n' +
         //           'Timestamp: '         + position.timestamp                + '\n');
-
+       
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         var latlng = new google.maps.LatLng(latitude, longitude);
 
-        var myOptions = {
-            zoom: 16,
-            center: latlng,
-            disableDefaultUI: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+        // var myOptions = {
+        //     zoom: 16,
+        //     center: latlng,
+        //     disableDefaultUI: true,
+        //     mapTypeId: google.maps.MapTypeId.ROADMAP
+        // };
+
+        var mapOptions = {
+            zoom: 13,
+            zoomControl: true,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.LARGE,
+                position: google.maps.ControlPosition.RIGHT_BOTTOM
+            },
+            panControl: true,
+            panControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_TOP
+            },
+            center: latlng
+
         };
        
         var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+
 
         var infowindow = new google.maps.InfoWindow({
                   position: latlng,
@@ -52,6 +69,94 @@ var app = {
         google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
 
 
+                var image2 = {
+                    url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-estadio.png',
+                };
+
+                var image = {
+                    url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-posicion.png',
+                };
+
+               
+                $.ajax({
+                    url: "http://cristalsmart.azurewebsites.net/assets/bares/ajax/ajax_todos_estadios_json.aspx/GetRegistros",
+                    type: "POST",
+                    data: JSON.stringify({}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                   
+                    success: function (result) {
+                        //console.log(result.d);
+
+                        var markers_json = result.d;
+                        
+                        $.each(markers_json, function(index, item_marker) {
+                            var actual_url = 'detalleestadios.aspx?ID=' + item_marker.ID + '&latitud='  + item_marker.latitud + '&longitud='  + item_marker.longitud;
+                            
+                            markers[index + 1] = new google.maps.Marker({
+                                position: new google.maps.LatLng(item_marker.latitud, item_marker.longitud),
+                                url: actual_url,
+                                title: item_marker.extra,
+                                map: map,
+                                icon: image,
+                                optimized: false
+                            });
+
+                        });
+
+                        this.onMarkersDisplay();
+                    }
+                })
+                .done(function(){
+
+                    //console.log("CONSTRUYENDO MAP");
+                });
+              
+                // Fin de marcadores
+
+          
+
+
+            
+
+
+    },
+    onMarkersDisplay: function(){
+
+        var bounceTimer;
+        for (i = 1; i < markers.length; i++) {
+            google.maps.event.addListener(markers[i], 'click', function () {
+                window.location.href = this.url;
+            });
+
+            google.maps.event.addListener(markers[i], 'mouseover', function () {
+
+                if (this.getAnimation() == null || typeof this.getAnimation() === 'undefined') {
+
+                    clearTimeout(bounceTimer);
+                    var that = this;
+                    bounceTimer = setTimeout(function () {
+                        that.setAnimation(google.maps.Animation.BOUNCE);
+                    },
+                    500);
+
+                }
+
+
+            });
+
+            google.maps.event.addListener(markers[i], 'mouseout', function () {
+
+                if (this.getAnimation() != null) {
+                    this.setAnimation(null);
+                }
+
+                clearTimeout(bounceTimer);
+
+            });
+
+        } 
+                 
     },
     onError:function(error) {
                 alert('code: '    + error.code    + '\n' +
