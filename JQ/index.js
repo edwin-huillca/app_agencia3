@@ -56,7 +56,8 @@ var app = {
             panControlOptions: {
                 position: google.maps.ControlPosition.RIGHT_TOP
             },
-            center: latlng
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
 
         };
        
