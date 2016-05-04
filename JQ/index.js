@@ -5,10 +5,10 @@ var app = {
         this.bindEvents();
     },
     bindEvents: function() {
-        //var params={position:{coords:{latitude: 0, longitude:0 }}};
-        //app.onSuccess(params);
+        var params={position:{coords:{latitude: 0, longitude:0 }}};
+        app.onSuccess(params);
 
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+        //document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady: function() {
         
@@ -28,10 +28,10 @@ var app = {
         //           'Speed: '             + position.coords.speed             + '\n' +
         //           'Timestamp: '         + position.timestamp                + '\n');
     
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        //var latitude = -12.093840199999999;
-        //var longitude= -77.0339961
+        //var latitude = position.coords.latitude;
+        //var longitude = position.coords.longitude;
+        var latitude = -12.093840199999999;
+        var longitude= -77.0339961
         
         var latlng = new google.maps.LatLng(latitude, longitude);
 
@@ -41,8 +41,10 @@ var app = {
         //     disableDefaultUI: true,
         //     mapTypeId: google.maps.MapTypeId.ROADMAP
         // };
+
+
         var map;
-        var markers = [];
+        
         var myOptions = {
             zoom: 13,
             zoomControl: true,
@@ -61,6 +63,9 @@ var app = {
         map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
 
 
+        
+
+
         var infowindow = new google.maps.InfoWindow({
                   position: latlng,
                   content: '<p>Tu posición actual</p>'+latlng
@@ -70,22 +75,40 @@ var app = {
             position: latlng,
             map: map,
             title: "Mi posición",
+            draggable: true,
             animation: google.maps.Animation.DROP
         });
+
         google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
 
+        // map.addListener('dragend', function(event) {
+        google.maps.event.addListener(marker, 'dragend', function(event) {
+          
+
+              //map.panTo(marker.getPosition());
+              
+            console.log(this.getPosition().lat());
+            console.log(this.getPosition().lng());
+            app.onDistanciaDisplay(map, this.getPosition().lat(), this.getPosition().lng());
+            return false;
+        
+         });
+
+        app.onDistanciaDisplay(map, latitude, longitude);
+
+    },
+    onDistanciaDisplay: function(mapi, latitude, longitude){
         var image = {
             url: 'http://cristalsmart.azurewebsites.net/assets/bares/images/pin-posicion.png',
         };
-               
+        var markers = [];
         $.ajax({
-            url: "http://cristalsmart.azurewebsites.net/assets/bares/ajax/ajax_todos_estadios_json.aspx/GetRegistros",
+            url: "http://cristalsmart.azurewebsites.net/assets/bares/ajax/ajax_todos_estadios_json.aspx/GetRegistrosDistancia",
             type: "POST",
-            data: JSON.stringify({}),
+            data: JSON.stringify({"latitud": latitude, "longitud":longitude}),
             contentType: "application/json; charset=utf-8",
             crossDomain : true,
             dataType: "json",
-           
             success: function (result) {
 
                 var markers_json = result.d;
@@ -97,19 +120,16 @@ var app = {
                         position: new google.maps.LatLng(item_marker.latitud, item_marker.longitud),
                         //url: actual_url,
                         title: item_marker.extra,
-                        map: map,
+                        map: mapi,
                         icon: image,
                         optimized: false
                     });
 
                 });
 
-                app.onMarkersDisplay(map,markers);
+                app.onMarkersDisplay(mapi,markers);
             }
         });
-              
-  
-
     },
     onMarkersDisplay: function(mapi,markers){
 
