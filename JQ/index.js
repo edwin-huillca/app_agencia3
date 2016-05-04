@@ -5,10 +5,10 @@ var app = {
         this.bindEvents();
     },
     bindEvents: function() {
-        var params={position:{coords:{latitude: 0, longitude:0 }}};
-        app.onSuccess(params);
+        //var params={position:{coords:{latitude: 0, longitude:0 }}};
+        //app.onSuccess(params);
 
-        //document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     onDeviceReady: function() {
         
@@ -28,10 +28,10 @@ var app = {
         //           'Speed: '             + position.coords.speed             + '\n' +
         //           'Timestamp: '         + position.timestamp                + '\n');
     
-        //var latitude = position.coords.latitude;
-        //var longitude = position.coords.longitude;
-        var latitude = -12.093840199999999;
-        var longitude= -77.0339961
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        //var latitude = -12.093840199999999;
+        //var longitude= -77.0339961
         
         var latlng = new google.maps.LatLng(latitude, longitude);
 
