@@ -1,39 +1,47 @@
 <!doctype html>
-<html lang="en" class="no-bg">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Geolocalización</title>
-        <link rel="stylesheet" href="JQ/jquery.mobile-1.4.2.min.css" />
-        
-		<script src="JQ/jquery-2.1.1.min.js"></script>
-		<script src="JQ/jquery.mobile-1.4.2.min.js"></script>
-	
+        <!--
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+            <title>Geolocalización</title>
+     
+            <link rel="stylesheet" href="JQ/jquery.mobile-1.4.2.min.css" />
+
+
+    		<script src="JQ/jquery-2.1.1.min.js"></script>
+    		<script src="JQ/jquery.mobile-1.4.2.min.js"></script>
+        -->
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+        <script src="JQ/jquery-2.1.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>        
+	    
         <style type="text/css">
-			#map-canvas{
-				height:100%;
-				width:100%;
-				padding:0;
-				position:absolute !important;
-            
-				top:75px;
-				right:0px;
-				bottom:0px !important;
-				left:0px !important;
-				/*border:solid 2px;*/
-			}
+            #content {
+                padding: 0;
+                position : absolute !important; 
+                top : 75px !important;  
+                right : 0; 
+                bottom : 0px !important;  
+                left : 0 !important;     
+            }
 		</style>
     </head>
     <body> 	
-    	<div data-role="page" id="paginaMapa" data-url="map-page">        	
-        	<div data-role="header">
+    	<div data-role="page" >        	
+        	<div data-role="header" data-theme="a">
         		<h1 style="min-height:70px">Tu posición actual
-                    <a class="ui-btn ui-icon-recycle ui-btn-icon-left" href="index.html" style="width:100px" rel="external">
+                   
+                    <a class="ui-btn ui-icon-recycle ui-btn-icon-left" href="index.html" style="width:100px;" rel="external">
                     REFRESCAR
                     </a>
                 </h1>
         	</div>
-        	<div id="map-canvas"></div>
+        	<div data-role="content" id="content">
+                <div id="map-canvas" style="height:100%;"></div>
+            </div>
+            <div data-role="footer" data-position="fixed" data-theme="a">COPYRIGTH</div>
         </div>
 
 <!--
